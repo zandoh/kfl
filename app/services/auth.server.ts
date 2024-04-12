@@ -2,6 +2,7 @@ import { User } from "@prisma/client";
 import { Authenticator } from "remix-auth";
 import { GoogleStrategy } from "remix-auth-google";
 import invariant from "tiny-invariant";
+import { createOAuthUser, getUserByEmail } from "~/models/user.server";
 import { sessionStorage } from "~/session.server";
 
 export const authenticator = new Authenticator<User>(sessionStorage, {
@@ -19,8 +20,26 @@ authenticator.use(
       callbackURL: `http://localhost:3000/auth/google/callback`,
     },
     async ({ profile }) => {
-      // @TODO zandoh find or create a user in database
-      return profile as unknown as User;
+      console.log("profile ", profile);
+      const existingUser = await getUserByEmail(profile._json.email);
+
+      console.log("existingUser ", existingUser);
+
+      if (existingUser) {
+        return existingUser;
+      }
+
+      const user = await createOAuthUser({
+        openId: profile._json.sub,
+        email: profile._json.email,
+        firstName: profile._json.given_name,
+        lastName: profile._json.family_name,
+        imgSrc: profile._json.picture,
+      });
+
+      console.log("user ", user);
+
+      return user;
     },
   ),
 );
