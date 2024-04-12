@@ -15,8 +15,7 @@ export default function Dashboard() {
 
   return (
     <div>
-      <h1>Welcome {user.email}!</h1>
-      <p>This is a protected page</p>
+      <h1>User email: {user.email}</h1>
       <Form action="/logout" method="post">
         <button>Logout</button>
       </Form>

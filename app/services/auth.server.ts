@@ -20,10 +20,7 @@ authenticator.use(
       callbackURL: `http://localhost:3000/auth/google/callback`,
     },
     async ({ profile }) => {
-      console.log("profile ", profile);
       const existingUser = await getUserByEmail(profile._json.email);
-
-      console.log("existingUser ", existingUser);
 
       if (existingUser) {
         return existingUser;
@@ -36,8 +33,6 @@ authenticator.use(
         lastName: profile._json.family_name,
         imgSrc: profile._json.picture,
       });
-
-      console.log("user ", user);
 
       return user;
     },

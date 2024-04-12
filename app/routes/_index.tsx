@@ -1,26 +1,26 @@
 import type { LoaderFunctionArgs, MetaFunction } from "@remix-run/node";
-import { Form, Link } from "@remix-run/react";
+import { Form, Link, useLoaderData } from "@remix-run/react";
 import { authenticator } from "~/services/auth.server";
 
-import { useOptionalUser } from "~/utils";
-
-export const meta: MetaFunction = () => [{ title: "Remix Notes" }];
+export const meta: MetaFunction = () => [
+  { title: "Kicker Fantasy League (KFL)" },
+];
 
 export const loader = async ({ request }: LoaderFunctionArgs) => {
-  const user = await authenticator.isAuthenticated(request, {
-    successRedirect: "/dashboard",
-  });
+  const user = await authenticator.isAuthenticated(request);
+
   return user;
 };
 
 export default function Index() {
-  const user = useOptionalUser();
+  const user = useLoaderData<typeof loader>();
 
   return (
     <div className="mx-auto mt-10 max-w-sm sm:flex sm:max-w-none sm:justify-center">
+      Stub for "marketing content"
       {user ? (
         <Link
-          to="/notes"
+          to="/dashboard"
           className="flex items-center justify-center rounded-md border border-transparent bg-white px-4 py-3 text-base font-medium text-blue-700 shadow-sm hover:bg-blue-50 sm:px-8"
         >
           View Dashboard for {user.email}
