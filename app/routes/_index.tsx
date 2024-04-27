@@ -1,5 +1,6 @@
 import type { LoaderFunctionArgs, MetaFunction } from "@remix-run/node";
-import { Form, Link, useLoaderData } from "@remix-run/react";
+import { Form, NavLink, useLoaderData } from "@remix-run/react";
+import { Button } from "~/components/ui/button";
 import { authenticator } from "~/services/auth.server";
 
 export const meta: MetaFunction = () => [
@@ -19,19 +20,13 @@ export default function Index() {
     <div className="mx-auto mt-10 max-w-sm sm:flex sm:max-w-none sm:justify-center">
       Stub for "marketing content"
       {user ? (
-        <Link
-          to="/dashboard"
-          className="flex items-center justify-center rounded-md border border-transparent bg-white px-4 py-3 text-base font-medium text-blue-700 shadow-sm hover:bg-blue-50 sm:px-8"
-        >
-          View Dashboard for {user.email}
-        </Link>
+        <Button asChild>
+          <NavLink to="/dashboard">View Dashboard for {user.email}</NavLink>
+        </Button>
       ) : (
         <Form action="/auth/google" method="post">
           <div className="px-6 sm:px-0 max-w-sm">
-            <button
-              type="submit"
-              className="text-white w-full bg-[#4285F4] hover:bg-[#4285F4]/90 focus:ring-4 focus:outline-none focus:ring-[#4285F4]/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center justify-between mr-2 mb-2"
-            >
+            <Button type="submit">
               <svg
                 className="mr-2 -ml-1 w-4 h-4"
                 aria-hidden="true"
@@ -48,7 +43,7 @@ export default function Index() {
                 ></path>
               </svg>
               Sign in with Google<div></div>
-            </button>
+            </Button>
           </div>
         </Form>
       )}

@@ -1,5 +1,6 @@
 import { LoaderFunctionArgs } from "@remix-run/node";
-import { Form, useLoaderData } from "@remix-run/react";
+import { useLoaderData } from "@remix-run/react";
+import { PortalLayout } from "~/layouts/_portal";
 import { authenticator } from "~/services/auth.server";
 
 export let loader = async ({ request }: LoaderFunctionArgs) => {
@@ -14,11 +15,8 @@ export default function Dashboard() {
   const { user } = useLoaderData<typeof loader>();
 
   return (
-    <div>
+    <PortalLayout>
       <h1>User email: {user.email}</h1>
-      <Form action="/logout" method="post">
-        <button>Logout</button>
-      </Form>
-    </div>
+    </PortalLayout>
   );
 }
