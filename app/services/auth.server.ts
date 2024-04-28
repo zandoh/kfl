@@ -2,6 +2,7 @@ import { User } from "@prisma/client";
 import { Authenticator } from "remix-auth";
 import { GoogleStrategy } from "remix-auth-google";
 import invariant from "tiny-invariant";
+
 import { createOAuthUser, getUserByEmail } from "~/models/user.server";
 import { sessionStorage } from "~/session.server";
 

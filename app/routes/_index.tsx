@@ -1,5 +1,6 @@
 import type { LoaderFunctionArgs, MetaFunction } from "@remix-run/node";
 import { Form, NavLink, useLoaderData } from "@remix-run/react";
+
 import { Button } from "~/components/ui/button";
 import { DropdownMenuItem } from "~/components/ui/dropdown-menu";
 import { UserMenu } from "~/components/user/usermenu";
@@ -106,10 +107,10 @@ export default function Index() {
             </h1>
             <p className="mt-6 text-lg leading-8 text-gray-300">
               Introducing the ultimate showdown in fantasy football — the
-              Kickers Only Fantasy League! This isn't just any fantasy league;
-              here, the spotlight shines on the unsung heroes of the gridiron:
-              the kickers. Every high-stakes field goal, every game-winning
-              extra point, they're all in your hands.
+              Kickers Only Fantasy League! This isn&apos;t just any fantasy
+              league; here, the spotlight shines on the unsung heroes of the
+              gridiron: the kickers. Every high-stakes field goal, every
+              game-winning extra point, they&apos;re all in your hands.
             </p>
           </div>
         </div>

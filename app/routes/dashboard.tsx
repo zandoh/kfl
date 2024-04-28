@@ -1,9 +1,10 @@
 import { LoaderFunctionArgs } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
+
 import { PortalLayout } from "~/layouts/_portal";
 import { authenticator } from "~/services/auth.server";
 
-export let loader = async ({ request }: LoaderFunctionArgs) => {
+export const loader = async ({ request }: LoaderFunctionArgs) => {
   const user = await authenticator.isAuthenticated(request, {
     failureRedirect: "/",
   });
